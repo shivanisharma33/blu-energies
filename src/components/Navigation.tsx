@@ -59,6 +59,7 @@ export default function Navigation({
       id: "assets",
       label: "Assets & Operations",
       subLinks: [
+        { label: "Explore Assets (Portal)", href: "/#explore" },
         { label: "Overview", href: "https://www.blu-energies.com/assets-and-operations/overview/" },
       ],
     },
@@ -66,6 +67,7 @@ export default function Navigation({
       id: "investors",
       label: "Investors",
       subLinks: [
+        { label: "Investor Hub (Portal)", href: "/#explore" },
         { label: "Outlook", href: "https://www.blu-energies.com/investors/outlook/" },
         { label: "Stock Information", href: "https://www.blu-energies.com/investors/stock-information/" },
         { label: "Financials", href: "https://www.blu-energies.com/investors/financials/" },
@@ -77,6 +79,7 @@ export default function Navigation({
       id: "news",
       label: "News & Media",
       subLinks: [
+        { label: "Regulatory Newsroom (Portal)", href: "/#explore" },
         { label: "News", href: "https://www.blu-energies.com/news-and-media/news/" },
         { label: "In the Media", href: "https://www.blu-energies.com/news-and-media/in-the-media/" },
       ],

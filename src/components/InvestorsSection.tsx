@@ -3,7 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { soundFx } from "../utils/audio";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Reveal from "./Reveal";
 
 export default function InvestorsSection() {
   return (
@@ -15,18 +16,20 @@ export default function InvestorsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Headline & Investment Thesis */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            {/* Eyebrow */}
-            <div className="mb-4">
-              <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#31b1ba]">
-                FOR INVESTORS
-              </span>
-            </div>
+            <Reveal>
+              {/* Eyebrow */}
+              <div className="mb-4">
+                <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#31b1ba]">
+                  FOR INVESTORS
+                </span>
+              </div>
 
-            {/* Headline matching screenshot */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#0b1b33] tracking-tight leading-[1.08] mb-6">
-              A Compelling <br />
-              Opportunity.
-            </h2>
+              {/* Headline matching screenshot */}
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#0b1b33] tracking-tight leading-[1.08] mb-6">
+                A Compelling <br />
+                <span className="text-[#31b1ba]">Opportunity.</span>
+              </h2>
+            </Reveal>
 
             {/* Paragraph */}
             <p className="text-base sm:text-lg text-slate-600 font-light leading-relaxed max-w-md mb-8">
@@ -71,13 +74,19 @@ export default function InvestorsSection() {
               {/* Right Half: Clean TSXV BLU Financial Data Table */}
               <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-1">
                     <h3 className="text-2xl font-bold tracking-wider text-[#0b1b33] font-sans flex items-center gap-1.5">
                       <span>TSXV:</span>
                       <span className="text-[#31b1ba]">BLU</span>
                     </h3>
 
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                      Indicative
+                    </span>
+                  </div>
+                  {/* Figures are static placeholders, not a market feed */}
+                  <div className="text-[11px] text-slate-400 font-mono mb-4">
+                    Delayed snapshot · see live quote below
                   </div>
 
                   {/* Stock Metrics */}
@@ -119,7 +128,7 @@ export default function InvestorsSection() {
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 text-xs font-semibold text-[#31b1ba] hover:text-[#0b1b33] transition-colors"
                   >
-                    <span>View Investor Information</span>
+                    <span>View Live Quote &amp; Investor Information</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>

@@ -3,16 +3,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { soundFx } from "../utils/audio";
-import {
-  ArrowRight,
-  Compass,
-  Layers,
-  Sparkles,
-  ExternalLink,
-  X,
-  Maximize2,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowRight, ExternalLink, X, CheckCircle2 } from "lucide-react";
+import Reveal from "./Reveal";
 
 interface AssetCard {
   id: string;
@@ -30,6 +22,7 @@ interface AssetCard {
 
 export default function AssetsOperationsSection() {
   const [selectedCard, setSelectedCard] = useState<AssetCard | null>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   const cards: AssetCard[] = [
     {
@@ -112,130 +105,166 @@ export default function AssetsOperationsSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
-        {/* TOP ROW: Headline & 3D Subsea Bathymetry Graphic */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-16 sm:mb-20">
-          {/* Left Text Column */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            {/* Eyebrow */}
-            <div className="mb-3">
+        {/* Header: headline left, intro copy right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-14 lg:mb-20">
+          <Reveal className="lg:col-span-7">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="w-8 h-px bg-[#31b1ba]" />
               <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#31b1ba]">
-                OUR ASSETS & OPERATIONS
+                Our Assets &amp; Operations
               </span>
             </div>
 
-            {/* Headline */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white tracking-tight leading-[1.08] mb-6">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-serif font-semibold text-white tracking-tight leading-[1.02]">
               Unlocking <br />
-              Potential
+              <span className="text-[#31b1ba]">Potential.</span>
             </h2>
+          </Reveal>
 
-            {/* Paragraph */}
-            <p className="text-base sm:text-lg text-white/75 font-light leading-relaxed max-w-md mb-8">
+          <Reveal className="lg:col-span-5 lg:pb-3" delay={0.15}>
+            <p className="text-lg sm:text-xl text-white/65 font-light leading-relaxed mb-8">
               High-potential deepwater assets in the West African margin, with exploration opportunities that can deliver meaningful, long-term value.
             </p>
 
-            {/* White Pill Button: Explore Our Assets -> */}
-            <div>
-              <a
-                href="https://www.blu-energies.com/assets-and-operations/overview/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={() => soundFx.playHover()}
-                onClick={() => soundFx.playGlassPing()}
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-white hover:bg-[#31b1ba] text-[#0b1b33] hover:text-white font-medium text-sm transition-all duration-300 shadow-xl shadow-black/30"
-              >
-                <span>Explore Our Assets</span>
-                <ArrowRight className="w-4 h-4 text-[#31b1ba] group-hover:text-white group-hover:translate-x-1 transition-all" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: 3D Subsea Bathymetry Cross-Section with Interactive Callouts */}
-          <div className="lg:col-span-7 relative">
-            <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl shadow-cyan-950/40 group">
-              <img
-                src="/subsea-bathymetry-block.jpg"
-                alt="Subsea Hydrocarbon Basin Exploration Bathymetry"
-                className="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-102"
-              />
-
-              {/* Interactive Callout Tags (Matching mockup: SEISMIC MAPPING, PROSPECT IDENTIFICATION, RESOURCE EVALUATION) */}
-              <div className="absolute right-4 top-8 flex flex-col gap-2.5">
-                {[
-                  "SEISMIC MAPPING",
-                  "PROSPECT IDENTIFICATION",
-                  "RESOURCE EVALUATION",
-                ].map((tag, i) => (
-                  <div
-                    key={i}
-                    className="px-3.5 py-1.5 rounded-md bg-black/60 backdrop-blur-md border border-cyan-400/40 text-[11px] font-mono tracking-wider text-cyan-200 flex items-center gap-2 shadow-lg"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#31b1ba] animate-pulse" />
-                    <span>{tag}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+            <a
+              href="https://www.blu-energies.com/assets-and-operations/overview/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={() => soundFx.playHover()}
+              onClick={() => soundFx.playGlassPing()}
+              className="group inline-flex items-center gap-4 pl-6 pr-2 py-2 rounded-full bg-white hover:bg-[#31b1ba] text-sm font-semibold text-[#0b1b33] hover:text-white transition-all duration-300"
+            >
+              <span>Explore Our Assets</span>
+              <span className="w-9 h-9 rounded-full bg-[#0b1b33] text-white flex items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5">
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </a>
+          </Reveal>
         </div>
 
-        {/* BOTTOM ROW: 3 Numbered Cards (01 Assets & Operations, 02 Our Team, 03 Exploration Opportunities) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {cards.map((card, idx) => (
-            <motion.div
-              key={card.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              whileHover={{ y: -8 }}
-              onClick={() => {
-                soundFx.playGlassPing();
-                setSelectedCard(card);
-              }}
-              className="group relative h-[360px] sm:h-[400px] rounded-2xl overflow-hidden cursor-pointer border border-white/15 hover:border-cyan-400/60 shadow-xl transition-all duration-500 bg-[#061426]"
-            >
-              {/* Background Image with Zoom */}
-              <div className="absolute inset-0 overflow-hidden">
+        {/* Expanding panel gallery: the active panel opens wide, the rest collapse to strips */}
+        <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 lg:h-[580px]">
+          {cards.map((card, idx) => {
+            const isActive = idx === activeIdx;
+            return (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                onMouseEnter={() => {
+                  if (!isActive) {
+                    soundFx.playHover();
+                    setActiveIdx(idx);
+                  }
+                }}
+                onClick={() => setActiveIdx(idx)}
+                className={`group relative overflow-hidden rounded-3xl cursor-pointer ring-1 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isActive
+                    ? "h-[520px] lg:h-auto lg:grow-[5] ring-[#31b1ba]/50 shadow-2xl shadow-cyan-950/50"
+                    : "h-[110px] lg:h-auto lg:grow ring-white/10 hover:ring-white/25"
+                } lg:basis-0`}
+              >
+                {/* Photo */}
                 <img
                   src={card.image}
-                  alt={card.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                  alt=""
+                  className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out ${
+                    isActive ? "scale-100" : "scale-125 grayscale-[40%]"
+                  }`}
                 />
-                {/* Contrast Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020a14] via-[#020a14]/60 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#020a14]/50 via-transparent to-[#020a14]/90" />
-              </div>
+                <div
+                  className={`absolute inset-0 transition-colors duration-700 ${
+                    isActive ? "bg-[#020a14]/20" : "bg-[#020a14]/70 group-hover:bg-[#020a14]/55"
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020a14] via-[#020a14]/30 to-transparent" />
 
-              {/* Number Badge Top Left */}
-              <div className="relative z-10 p-6 flex items-center justify-between">
-                <span className="text-xs font-mono font-bold tracking-widest text-cyan-300">
-                  {card.num}
-                </span>
-
-                <span className="w-7 h-7 rounded-full bg-white/10 group-hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white/80 group-hover:text-white transition-all">
-                  <Maximize2 className="w-3.5 h-3.5" />
-                </span>
-              </div>
-
-              {/* Bottom Info: Title, Subtitle & Circular Arrow Button */}
-              <div className="absolute inset-x-0 bottom-0 p-6 z-10 flex items-end justify-between gap-4">
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white tracking-tight leading-snug mb-1.5 group-hover:text-cyan-200 transition-colors">
+                {/* Collapsed state: number + title (vertical on desktop) */}
+                <div
+                  className={`absolute inset-0 p-6 flex lg:flex-col items-center lg:items-start justify-between transition-opacity duration-300 ${
+                    isActive ? "opacity-0 pointer-events-none" : "opacity-100 delay-300"
+                  }`}
+                >
+                  <span className="text-xs font-mono tracking-widest text-[#31b1ba]">{card.num}</span>
+                  <h3 className="text-lg lg:text-xl font-serif font-semibold text-white whitespace-nowrap lg:[writing-mode:vertical-rl] lg:rotate-180">
                     {card.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed">
-                    {card.subtitle}
-                  </p>
                 </div>
 
-                {/* Circular Arrow Button (matching mockup) */}
-                <div className="w-10 h-10 rounded-full border border-white/30 group-hover:border-cyan-400 bg-white/5 group-hover:bg-[#31b1ba] flex items-center justify-center shrink-0 text-white transition-all duration-300">
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                {/* Expanded state */}
+                <div
+                  className={`absolute inset-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-between transition-all duration-500 ${
+                    isActive
+                      ? "opacity-100 translate-y-0 delay-300"
+                      : "opacity-0 translate-y-6 pointer-events-none"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-xs font-mono tracking-widest text-white">
+                      {card.num} <span className="text-white/40">/ 0{cards.length}</span>
+                    </span>
+                    <a
+                      href={card.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      tabIndex={isActive ? 0 : -1}
+                      aria-label={`Visit ${card.title} page`}
+                      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white hover:text-[#0b1b33] flex items-center justify-center text-white transition-all"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
+
+                  <div className="max-w-xl">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-white leading-[1.05] mb-3">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-white/75 font-light leading-relaxed mb-6">
+                      {card.subtitle}
+                    </p>
+
+                    {/* Key figures */}
+                    <div className="hidden sm:grid grid-cols-3 gap-px rounded-2xl overflow-hidden bg-white/10 backdrop-blur-md border border-white/10 mb-6">
+                      {card.details.metrics.map((m) => (
+                        <div key={m.label} className="bg-[#020a14]/50 px-4 py-3">
+                          <div className="text-sm lg:text-base font-semibold text-white">{m.value}</div>
+                          <div className="text-[10px] font-mono uppercase tracking-wider text-white/50 mt-0.5">
+                            {m.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      tabIndex={isActive ? 0 : -1}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        soundFx.playGlassPing();
+                        setSelectedCard(card);
+                      }}
+                      className="group/btn inline-flex items-center gap-4 pl-5 pr-1.5 py-1.5 rounded-full bg-white text-sm font-semibold text-[#0b1b33] hover:bg-[#31b1ba] hover:text-white transition-colors duration-300"
+                    >
+                      <span>View details</span>
+                      <span className="w-8 h-8 rounded-full bg-[#0b1b33] text-white flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5">
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Active indicator bar */}
+                <span
+                  className={`absolute bottom-0 left-0 h-[3px] bg-[#31b1ba] transition-all duration-700 ${
+                    isActive ? "w-full" : "w-0"
+                  }`}
+                />
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 

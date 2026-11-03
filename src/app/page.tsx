@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Scene3D from "../components/Scene3D";
 import Navigation from "../components/Navigation";
 import HeroSection from "../components/HeroSection";
+import HeroVideo from "../components/HeroVideo";
+import MarqueeBand from "../components/MarqueeBand";
+import WaveDivider from "../components/WaveDivider";
 import AboutSection from "../components/AboutSection";
 import AssetsOperationsSection from "../components/AssetsOperationsSection";
 import ImpactSection from "../components/ImpactSection";
@@ -36,29 +38,10 @@ export default function Home() {
       <CustomCursor />
 
       {/* =========================================================================
-          SECTION 1: HERO VIEWPORT (100dvh - Untouched as instructed)
+          SECTION 1: HERO VIEWPORT (100dvh - HD sea & ship video background)
          ========================================================================= */}
       <section className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden">
-        {/* Offshore Mining Discovery Background Image */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <img
-            src="/bluenergies-discovery.webp"
-            alt="Blu Energies Offshore Mining Discovery"
-            className="w-full h-full object-cover transition-transform duration-700 ease-out"
-            style={{
-              transform: "scaleX(-1)",
-              objectPosition: "25% 65%",
-            }}
-          />
-          {/* Left-Side Contrast Overlay */}
-          <div className="absolute inset-y-0 left-0 w-full md:w-3/5 bg-gradient-to-r from-[#040d1a]/95 via-[#040d1a]/60 to-transparent" />
-          {/* Edge Softening */}
-          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#040d1a]/70 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#040d1a] to-transparent" />
-        </div>
-
-        {/* 3D WebGL Canvas Layer - Full Viewport */}
-        <Scene3D opacity={0.7} />
+        <HeroVideo />
 
         {/* Main UI Overlay - Full Viewport Layout */}
         <div className="relative z-10 w-full h-full flex-1 flex flex-col justify-between">
@@ -71,10 +54,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Scrolling highlights band */}
+      <MarqueeBand />
+      <WaveDivider from="#040d1a" to="#ffffff" />
+
       {/* =========================================================================
           SECTION 2: ABOUT BLU ENERGIES (Focused on What's Next.)
          ========================================================================= */}
       <AboutSection />
+      <WaveDivider from="#ffffff" to="#040e1d" flip />
 
       {/* =========================================================================
           SECTION 3: OUR ASSETS & OPERATIONS (Unlocking Potential)
@@ -90,6 +78,7 @@ export default function Home() {
           SECTION 5: FOR INVESTORS (A Compelling Opportunity.)
          ========================================================================= */}
       <InvestorsSection />
+      <WaveDivider from="#ffffff" to="#040e1d" />
 
       {/* =========================================================================
           SECTION 6: NEWS & MEDIA (Latest Updates)

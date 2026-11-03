@@ -13,6 +13,7 @@ import {
   Share2,
   X,
 } from "lucide-react";
+import Reveal from "./Reveal";
 
 interface NewsItem {
   id: string;
@@ -74,16 +75,16 @@ export default function NewsSection() {
       <div className="relative max-w-7xl mx-auto w-full">
         {/* Header Bar */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
-          <div>
+          <Reveal>
             <div className="mb-2">
               <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#31b1ba]">
                 NEWS & MEDIA
               </span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-serif font-bold text-white tracking-tight">
-              Latest Updates
+              Latest <span className="text-[#31b1ba]">Updates</span>
             </h2>
-          </div>
+          </Reveal>
 
           {/* Right Controls: View All News & Slider Arrows */}
           <div className="flex items-center gap-6">

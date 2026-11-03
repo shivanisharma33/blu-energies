@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Outfit, Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -16,6 +16,13 @@ const inter = Inter({
   display: "swap",
 });
 
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  style: ["normal"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "A West Africa Deepwater Oil & Gas Explorer",
   description: "Pioneering offshore energy exploration and deepwater subsea operations across West Africa.",
@@ -29,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${inter.variable} h-full antialiased`}
+      className={`${outfit.variable} ${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans bg-[#9eb4d4] text-white selection:bg-white/30 selection:text-white overflow-x-hidden">
         {children}

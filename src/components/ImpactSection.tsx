@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   SunMedium,
 } from "lucide-react";
+import Reveal from "./Reveal";
 
 export default function ImpactSection() {
   const impacts = [
@@ -42,10 +43,12 @@ export default function ImpactSection() {
     >
       {/* Background: Aerial Coastline Waves with Left Contrast Overlay */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        {/* Mirrored so the calm deep water sits behind the copy on the left */}
         <img
-          src="/coastal-waves.jpg"
-          alt="Aerial Coastal Waves"
-          className="w-full h-full object-cover object-center scale-105"
+          src="/bluenergies-discovery.webp"
+          alt="Offshore platform and support vessel in deep water"
+          className="w-full h-full object-cover scale-105"
+          style={{ transform: "scaleX(-1)", objectPosition: "30% 50%" }}
         />
         {/* Contrast Gradient: Dark on left so text is crisp, revealing the dramatic waves on the right */}
         <div className="absolute inset-y-0 left-0 w-full lg:w-3/5 bg-gradient-to-r from-[#020a14]/95 via-[#030e1d]/85 to-transparent" />
@@ -57,20 +60,22 @@ export default function ImpactSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Headline & Mission */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Eyebrow */}
-            <div className="mb-4">
-              <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#31b1ba]">
-                OUR IMPACT
-              </span>
-            </div>
+            <Reveal>
+              {/* Eyebrow */}
+              <div className="mb-4">
+                <span className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#31b1ba]">
+                  OUR IMPACT
+                </span>
+              </div>
 
-            {/* Headline matching screenshot */}
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-serif font-bold text-white tracking-tight leading-[1.1] mb-6">
-              Responsible <br />
-              Exploration <br />
-              for a <span className="text-[#31b1ba]">Brighter</span> <br />
-              <span className="text-[#31b1ba]">Tomorrow.</span>
-            </h2>
+              {/* Headline matching screenshot */}
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-serif font-bold text-white tracking-tight leading-[1.1] mb-6">
+                Responsible <br />
+                Exploration <br />
+                for a <span className="text-[#31b1ba]">Brighter</span> <br />
+                <span className="text-[#31b1ba]">Tomorrow.</span>
+              </h2>
+            </Reveal>
 
             {/* Paragraph */}
             <p className="text-base sm:text-lg text-white/80 font-light leading-relaxed max-w-xl mb-8">
